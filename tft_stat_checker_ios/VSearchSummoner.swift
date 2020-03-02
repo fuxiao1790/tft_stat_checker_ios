@@ -1,4 +1,4 @@
-//
+    //
 //  ContentView.swift
 //  tft_stat_checker_ios
 //
@@ -8,9 +8,16 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct ViewSearchSummoner: View {
     var body: some View {
-        Text("Hello, World!")
+        VStack() {
+            HStack() {
+                Text("Search Summoner Name")
+                Spacer()
+                Text("NA")
+            }
+        }
+        .padding()
     }
 }
 
