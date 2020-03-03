@@ -8,37 +8,39 @@
 
 import Foundation
 
-class MSummonerData : ObservableObject {
+class MSummonerData {
 
-    @Published var id : String
-    @Published var accountId : String
-    @Published var puuid : String
-    @Published var name : String
-    @Published var profileIconId : Int
-    @Published var summonerLevel : Int
+    var id : String
+    var accountId : String
+    var puuid : String
+    var name : String
+    var profileIconId : Int
+    var summonerLevel : Int
     
     init() {
         self.id = ""
         self.accountId = ""
         self.puuid = ""
-        self.name = "dummy name"
+        self.name = ""
         self.profileIconId = 1
         self.summonerLevel = 1
     }
     
     func getSummonerByName(summonerName : String, platform : String, onComplete : @escaping (Bool) -> Void) {
+        if (summonerName.count == 0 || platform.count == 0) {
+            onComplete(false)
+        }
         let platformURL : String = CONFIG.getPlatformURLByName(platform: platform)
         let route : String = "/tft/summoner/v1/summoners/by-name"
         let data : String = "/" + summonerName + "?summonerName=" + summonerName
         let urlString = platformURL + route + data
-        let session = URLSession.shared
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.addValue(CONFIG.API_KEY, forHTTPHeaderField: "X-Riot-Token")
         
         print(urlString)
         
-        session.dataTask(
+        URLSession.shared.dataTask(
             with: request,
             completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
                 if let data = data {
@@ -66,7 +68,9 @@ class MSummonerData : ObservableObject {
                         print(error)
                         onComplete(false)
                     }
-                } // if
+                } else {
+                    onComplete(false)
+                }
             } // completionHandler
         ).resume()
     }

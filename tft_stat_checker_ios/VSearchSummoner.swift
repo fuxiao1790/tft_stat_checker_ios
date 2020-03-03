@@ -11,17 +11,15 @@ struct VSearchSummoner : View {
     @State private var searchText : String = "" // user input
     @State private var searchPlatform : String = "" // user input
     
-    @State private var isLoadingData : Bool = false
+    @State private var isLoadingData : Bool = false // prevent new api calls when there is already an api call pending
+    @State private var showSearchResult : Bool = false // display search result
     
-    @State private var resultName : String = "Summoner Name" // search result summoner name
-    
-    @State private var showSearchResult : Bool = false //
-    
-    private var summonerData : MSummonerData = MSummonerData()
+    @State private var summonerData : MSummonerData = MSummonerData()
     
     func fetchSummonerdata(name : String, platform: String) {
         if (!self.isLoadingData) {
             self.isLoadingData = true
+            self.showSearchResult = false
             summonerData.getSummonerByName(
                 summonerName: name,
                 platform: platform,
@@ -29,10 +27,8 @@ struct VSearchSummoner : View {
                     self.isLoadingData = false
                     if (status) {
                         self.showSearchResult = true
-                        self.resultName = self.summonerData.name
                     } else {
                         self.showSearchResult = false
-                        self.resultName = ""
                     }
                 }
             )
@@ -50,8 +46,16 @@ struct VSearchSummoner : View {
                 )
             }
             
-            Text("Search Result")
-            Text(resultName)
+            if (self.showSearchResult) {
+                Text("Search Result")
+                Text(self.summonerData.name)
+                Text(String(self.summonerData.summonerLevel))
+                Text(self.summonerData.id)
+                Text(self.summonerData.accountId)
+                Text(self.summonerData.puuid)
+            } else if (self.isLoadingData) {
+                Text("Loading Data")
+            }
         }
     }
 }
