@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-tft_stat_checker_ios-tft_stat_checker_iosTests/Pods-tft_stat_checker_ios-tft_stat_checker_iosTests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework
+${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework
+${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework

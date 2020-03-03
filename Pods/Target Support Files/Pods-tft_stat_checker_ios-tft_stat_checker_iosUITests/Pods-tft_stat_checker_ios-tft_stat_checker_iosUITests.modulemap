@@ -1,0 +1,6 @@
+framework module Pods_tft_stat_checker_ios_tft_stat_checker_iosUITests {
+  umbrella header "Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
