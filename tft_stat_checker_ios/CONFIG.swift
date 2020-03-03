@@ -9,7 +9,7 @@
 import Foundation
 
 class CONFIG {
-    static let API_KEY = "RGAPI-6abcaa2b-a599-4f65-a185-624386234a95"
+    static let API_KEY = "RGAPI-e013f5e9-ecc5-4472-9996-9ee65c5d7277"
     
     static func getRegionURLByName(platform: String) -> String {
         switch(platform) {

@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		457D63198D8E2EAFDBA3212A /* Pods_tft_stat_checker_ios_tft_stat_checker_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D5CF88B61FF03C8B0B43439 /* Pods_tft_stat_checker_ios_tft_stat_checker_iosUITests.framework */; };
 		95AD189BA9E020039FC64E5F /* Pods_tft_stat_checker_ios_tft_stat_checker_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2605696172DAC5F36A2CF16 /* Pods_tft_stat_checker_ios_tft_stat_checker_iosTests.framework */; };
 		A6A3124BEF6EC8FB2A70031C /* Pods_tft_stat_checker_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65330B14A725A1B17DC649C /* Pods_tft_stat_checker_ios.framework */; };
+		AC233974240EA7E700F3E45B /* VMSearchSummoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC233973240EA7E700F3E45B /* VMSearchSummoner.swift */; };
 		C3F5A4DC24085979005D8F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DB24085979005D8F79 /* AppDelegate.swift */; };
 		C3F5A4DE24085979005D8F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */; };
 		C3F5A4E024085979005D8F79 /* VSearchSummoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */; };
@@ -48,6 +49,7 @@
 		956A53FB601BC33DDEA23753 /* Pods-tft_stat_checker_ios-tft_stat_checker_iosTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tft_stat_checker_ios-tft_stat_checker_iosTests.debug.xcconfig"; path = "Target Support Files/Pods-tft_stat_checker_ios-tft_stat_checker_iosTests/Pods-tft_stat_checker_ios-tft_stat_checker_iosTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A515E8E03CC72BE08576CC6C /* Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests/Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A65330B14A725A1B17DC649C /* Pods_tft_stat_checker_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tft_stat_checker_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC233973240EA7E700F3E45B /* VMSearchSummoner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMSearchSummoner.swift; sourceTree = "<group>"; };
 		C3F5A4D824085979005D8F79 /* tft_stat_checker_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tft_stat_checker_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F5A4DB24085979005D8F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +115,6 @@
 				A515E8E03CC72BE08576CC6C /* Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig */,
 				FD1CE75CD8897EA88EDB1D87 /* Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -125,6 +126,16 @@
 				3D5CF88B61FF03C8B0B43439 /* Pods_tft_stat_checker_ios_tft_stat_checker_iosUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC233972240E9F1500F3E45B /* SearchSummoner */ = {
+			isa = PBXGroup;
+			children = (
+				C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */,
+				C3F5A52624096AE3005D8F79 /* MSummonerData.swift */,
+				AC233973240EA7E700F3E45B /* VMSearchSummoner.swift */,
+			);
+			path = SearchSummoner;
 			sourceTree = "<group>";
 		};
 		C3F5A4CF24085979005D8F79 = {
@@ -152,14 +163,13 @@
 		C3F5A4DA24085979005D8F79 /* tft_stat_checker_ios */ = {
 			isa = PBXGroup;
 			children = (
+				AC233972240E9F1500F3E45B /* SearchSummoner */,
 				C3F5A4DB24085979005D8F79 /* AppDelegate.swift */,
 				C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */,
-				C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */,
 				C3F5A4E62408597B005D8F79 /* LaunchScreen.storyboard */,
 				C3F5A4E12408597B005D8F79 /* Assets.xcassets */,
 				C3F5A4E32408597B005D8F79 /* Preview Content */,
 				C3F5A4E92408597B005D8F79 /* Info.plist */,
-				C3F5A52624096AE3005D8F79 /* MSummonerData.swift */,
 				C3F5A541240972CC005D8F79 /* CONFIG.swift */,
 			);
 			path = tft_stat_checker_ios;
@@ -432,6 +442,7 @@
 			files = (
 				C3F5A4DC24085979005D8F79 /* AppDelegate.swift in Sources */,
 				C3F5A542240972CC005D8F79 /* CONFIG.swift in Sources */,
+				AC233974240EA7E700F3E45B /* VMSearchSummoner.swift in Sources */,
 				C3F5A4DE24085979005D8F79 /* SceneDelegate.swift in Sources */,
 				C3F5A4E024085979005D8F79 /* VSearchSummoner.swift in Sources */,
 				C3F5A52724096AE3005D8F79 /* MSummonerData.swift in Sources */,
@@ -604,6 +615,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"tft_stat_checker_ios/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tft_stat_checker_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -624,6 +636,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"tft_stat_checker_ios/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = tft_stat_checker_ios/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

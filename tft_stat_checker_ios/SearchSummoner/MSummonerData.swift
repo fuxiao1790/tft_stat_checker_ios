@@ -30,12 +30,13 @@ class MSummonerData : ObservableObject {
         let platformURL : String = CONFIG.getPlatformURLByName(platform: platform)
         let route : String = "/tft/summoner/v1/summoners/by-name"
         let data : String = "/" + summonerName + "?summonerName=" + summonerName
-        
         let urlString = platformURL + route + data
         let session = URLSession.shared
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.addValue(CONFIG.API_KEY, forHTTPHeaderField: "X-Riot-Token")
+        
+        print(urlString)
         
         session.dataTask(
             with: request,
@@ -58,13 +59,15 @@ class MSummonerData : ObservableObject {
                         self.profileIconId = profileIconId;
                         self.summonerLevel = summonerLevel;
                         
+                        print(json)
+                        
                         onComplete(true)
                     } catch {
                         print(error)
                         onComplete(false)
                     }
-                }
-            }
+                } // if
+            } // completionHandler
         ).resume()
     }
 }
