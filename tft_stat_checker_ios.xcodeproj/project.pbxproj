@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		C3F5A4DC24085979005D8F79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DB24085979005D8F79 /* AppDelegate.swift */; };
 		C3F5A4DE24085979005D8F79 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */; };
-		C3F5A4E024085979005D8F79 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DF24085979005D8F79 /* ContentView.swift */; };
+		C3F5A4E024085979005D8F79 /* VSearchSummoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */; };
 		C3F5A4E22408597B005D8F79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3F5A4E12408597B005D8F79 /* Assets.xcassets */; };
 		C3F5A4E52408597B005D8F79 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C3F5A4E42408597B005D8F79 /* Preview Assets.xcassets */; };
 		C3F5A4E82408597B005D8F79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3F5A4E62408597B005D8F79 /* LaunchScreen.storyboard */; };
 		C3F5A4F32408597B005D8F79 /* tft_stat_checker_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4F22408597B005D8F79 /* tft_stat_checker_iosTests.swift */; };
 		C3F5A4FE2408597B005D8F79 /* tft_stat_checker_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A4FD2408597B005D8F79 /* tft_stat_checker_iosUITests.swift */; };
+		C3F5A52724096AE3005D8F79 /* MSummonerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A52624096AE3005D8F79 /* MSummonerData.swift */; };
+		C3F5A542240972CC005D8F79 /* CONFIG.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F5A541240972CC005D8F79 /* CONFIG.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +40,7 @@
 		C3F5A4D824085979005D8F79 /* tft_stat_checker_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tft_stat_checker_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F5A4DB24085979005D8F79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C3F5A4DF24085979005D8F79 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */ = {isa = PBXFileReference; indentWidth = 4; lastKnownFileType = sourcecode.swift; path = VSearchSummoner.swift; sourceTree = "<group>"; tabWidth = 4; wrapsLines = 0; };
 		C3F5A4E12408597B005D8F79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C3F5A4E42408597B005D8F79 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C3F5A4E72408597B005D8F79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +51,8 @@
 		C3F5A4F92408597B005D8F79 /* tft_stat_checker_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tft_stat_checker_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3F5A4FD2408597B005D8F79 /* tft_stat_checker_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tft_stat_checker_iosUITests.swift; sourceTree = "<group>"; };
 		C3F5A4FF2408597B005D8F79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3F5A52624096AE3005D8F79 /* MSummonerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSummonerData.swift; sourceTree = "<group>"; };
+		C3F5A541240972CC005D8F79 /* CONFIG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CONFIG.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +105,13 @@
 			children = (
 				C3F5A4DB24085979005D8F79 /* AppDelegate.swift */,
 				C3F5A4DD24085979005D8F79 /* SceneDelegate.swift */,
-				C3F5A4DF24085979005D8F79 /* ContentView.swift */,
-				C3F5A4E12408597B005D8F79 /* Assets.xcassets */,
+				C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */,
 				C3F5A4E62408597B005D8F79 /* LaunchScreen.storyboard */,
-				C3F5A4E92408597B005D8F79 /* Info.plist */,
+				C3F5A4E12408597B005D8F79 /* Assets.xcassets */,
 				C3F5A4E32408597B005D8F79 /* Preview Content */,
+				C3F5A4E92408597B005D8F79 /* Info.plist */,
+				C3F5A52624096AE3005D8F79 /* MSummonerData.swift */,
+				C3F5A541240972CC005D8F79 /* CONFIG.swift */,
 			);
 			path = tft_stat_checker_ios;
 			sourceTree = "<group>";
@@ -268,8 +274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3F5A4DC24085979005D8F79 /* AppDelegate.swift in Sources */,
+				C3F5A542240972CC005D8F79 /* CONFIG.swift in Sources */,
 				C3F5A4DE24085979005D8F79 /* SceneDelegate.swift in Sources */,
-				C3F5A4E024085979005D8F79 /* ContentView.swift in Sources */,
+				C3F5A4E024085979005D8F79 /* VSearchSummoner.swift in Sources */,
+				C3F5A52724096AE3005D8F79 /* MSummonerData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

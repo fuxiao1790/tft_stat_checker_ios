@@ -8,21 +8,30 @@
 
 import SwiftUI
 
-struct ViewSearchSummoner: View {
+struct VSearchSummoner : View {
+    var summonerDataVM = VMSummonerData()
     var body: some View {
         VStack() {
-            HStack() {
-                Text("Search Summoner Name")
-                Spacer()
-                Text("NA")
-            }
+            Text(summonerDataVM.summonerData.name)
+            Text("Dummy text")
+            Button(
+                action: { self.summonerDataVM.fetchSummonerData(summonerName: "appearofflinemod", platform: "NA")},
+                label: { Text("fetch data") }
+            )
         }
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+class VMSummonerData : ObservableObject {
+    var summonerData : MSummonerData = MSummonerData()
+    
+    func fetchSummonerData(summonerName : String, platform : String) {
+        summonerData.getSummonerByName(
+            summonerName: summonerName,
+            platform: platform,
+            onComplete: {(status : Bool) in
+                print(self.summonerData.name)
+            }
+        )
     }
 }

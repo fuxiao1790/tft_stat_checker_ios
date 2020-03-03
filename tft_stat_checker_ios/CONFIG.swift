@@ -7,3 +7,55 @@
 //
 
 import Foundation
+
+class CONFIG {
+    static let API_KEY = "RGAPI-6abcaa2b-a599-4f65-a185-624386234a95"
+    
+    static func getRegionURLByName(platform: String) -> String {
+        switch(platform) {
+            case "NA": return "https://americas.api.riotgames.com"
+            case "BR": return "https://americas.api.riotgames.com"
+            case "LA": return "https://americas.api.riotgames.com"
+            case "EUNE": return "https://europe.api.riotgames.com"
+            case "EUW": return "https://europe.api.riotgames.com"
+            case "TR": return "https://europe.api.riotgames.com"
+            case "RU": return "https://europe.api.riotgames.com"
+            case "JP": return "https://asia.api.riotgames.com"
+            case "KR": return "https://asia.api.riotgames.com"
+            case "OC": return "https://asia.api.riotgames.com"
+            default: return ""
+        }
+    }
+    
+    static func getPlatformURLByName(platform: String) -> String {
+        switch(platform) {
+            case "BR": return "https://br1.api.riotgames.com"
+            case "EUNE": return "https://eun1.api.riotgames.com"
+            case "EUW": return "https://euw1.api.riotgames.com"
+            case "JP": return "https://jp1.api.riotgames.com"
+            case "KR": return "https://kr.api.riotgames.com"
+            case "LA": return "https://la1.api.riotgames.com"
+            case "OC": return "https://oc1.api.riotgames.com"
+            case "TR": return "https://tr1.api.riotgames.com"
+            case "RU": return "https://ru.api.riotgames.com"
+            case "NA": return "https://na1.api.riotgames.com"
+            default: return ""
+        }
+    }
+    
+    static func getPlatformDisplayName(platform: String) -> String {
+        switch(platform) {
+            case "BR": return "Brazil"
+            case "EUNE": return "EU Nordic / East"
+            case "EUW": return "EW West"
+            case "JP": return "Japan"
+            case "KR": return "Korea"
+            case "LA": return "Latin America"
+            case "OC": return "Oceania"
+            case "TR": return "Turkey"
+            case "RU": return "Russia"
+            case "NA": return "North America"
+            default: return ""
+        }
+    }
+}
