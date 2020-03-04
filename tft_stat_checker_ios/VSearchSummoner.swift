@@ -71,23 +71,32 @@ struct VSearchSummoner : View {
             HStack() {
                 
                 TextField("Summoner Name", text: $searchText)
+                    .padding(EdgeInsets(top: 6, leading: 24, bottom: 6, trailing: 12))
+                    .background(Color.gray)
+                    .cornerRadius(36)
                 
                 Button(
                     action: { self.togglePlatformPicker() },
                     label: { Text(self.searchPlatform) }
-                ).sheet(
-                    isPresented: $showPlatformPicker,
-                    content: {
-                        VPlatformPicker(
-                            toggleVisibility: self.togglePlatformPicker,
-                            selected: self.$searchPlatform
-                        )
-                    }
                 )
+                    .padding(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                    .background(Color.gray)
+                    .cornerRadius(36)
+                    .sheet(
+                        isPresented: $showPlatformPicker,
+                        content: {
+                            VPlatformPicker(
+                                toggleVisibility: self.togglePlatformPicker,
+                                initialSelected: self.searchPlatform
+                            )
+                        }
+                    )
                 
             }.padding(EdgeInsets(top: 12, leading: 12, bottom: 0, trailing: 12))
             
             Divider()
+            
+            
             
             Spacer()
         }
