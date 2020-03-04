@@ -15,8 +15,9 @@ struct VSearchSummoner : View {
     @State private var showSearchResult : Bool = false // display search result
     
     @State private var summonerData : MSummonerData = MSummonerData()
+    @State private var summonerRankedData : MSummonerRankedData = MSummonerRankedData()
     
-    func fetchSummonerdata(name : String, platform: String) {
+    func fetchSummonerdata(name : String, platform : String) {
         if (!self.isLoadingData) {
             self.isLoadingData = true
             self.showSearchResult = false
@@ -24,15 +25,29 @@ struct VSearchSummoner : View {
                 summonerName: name,
                 platform: platform,
                 onComplete: { (status) in
-                    self.isLoadingData = false
                     if (status) {
-                        self.showSearchResult = true
+                        self.fetchSummonerRankedData()
                     } else {
                         self.showSearchResult = false
                     }
                 }
             )
         }
+    }
+    
+    func fetchSummonerRankedData() {
+        self.summonerRankedData.getSummonerRankById(
+            id: self.summonerData.id,
+            platform: self.searchPlatform,
+            onComplete: { (status) in
+                self.isLoadingData = false
+                if (status) {
+                    self.showSearchResult = true
+                } else {
+                    self.showSearchResult = false
+                }
+            }
+        )
     }
     
     var body: some View {

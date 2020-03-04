@@ -23,7 +23,7 @@ class MSummonerRankedData {
     var freshBlood : Bool = false
     var hotStreak : Bool = false
     
-    func getSummonerRankById(id : String, platform : String, onComplete: (Bool) -> Void) {
+    func getSummonerRankById(id : String, platform : String, onComplete: @escaping (Bool) -> Void) {
         if (id.count == 0 || platform.count == 0) {
             onComplete(false)
         }
@@ -49,15 +49,29 @@ class MSummonerRankedData {
                         guard let queueType = json["queueType"] as? String else {return}
                         guard let tier = json["tier"] as? String else {return}
                         guard let rank = json["rank"] as? String else {return}
-                        guard let summonerId = json["summonerId"] as? Int else {return}
-                        guard let summonerName = json["summonerName"] as? Int else {return}
+                        guard let summonerName = json["summonerName"] as? String else {return}
+                        guard let summonerId = json["summonerId"] as? String else {return}
+                        guard let leaguePoints = json["leaguePoints"] as? Int else {return}
+                        guard let wins = json["wins"] as? Int else {return}
+                        guard let losses = json["losses"] as? Int else {return}
+                        guard let veteran = json["veteran"] as? Bool else {return}
+                        guard let inactive = json["inactive"] as? Bool else {return}
+                        guard let freshBlood = json["freshBlood"] as? Bool else {return}
+                        guard let hotStreak = json["hotStreak"] as? Bool else {return}
                         
-                        self.id = id;
-                        self.accountId = accountId;
-                        self.puuid = puuid;
-                        self.name = name;
-                        self.profileIconId = profileIconId;
-                        self.summonerLevel = summonerLevel;
+                        self.leagueId = leagueId
+                        self.queueType = queueType
+                        self.tier = tier
+                        self.rank = rank
+                        self.summonerName = summonerName
+                        self.summonerId = summonerId
+                        self.leaguePoints = leaguePoints
+                        self.wins = wins
+                        self.losses = losses
+                        self.veteran = veteran
+                        self.inactive = inactive
+                        self.freshBlood = freshBlood
+                        self.hotStreak = hotStreak
                         
                         print(json)
                         
