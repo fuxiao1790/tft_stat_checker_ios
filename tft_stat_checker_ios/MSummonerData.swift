@@ -10,21 +10,12 @@ import Foundation
 
 class MSummonerData {
 
-    var id : String
-    var accountId : String
-    var puuid : String
-    var name : String
-    var profileIconId : Int
-    var summonerLevel : Int
-    
-    init() {
-        self.id = ""
-        self.accountId = ""
-        self.puuid = ""
-        self.name = ""
-        self.profileIconId = 1
-        self.summonerLevel = 1
-    }
+    var id : String = ""
+    var accountId : String = ""
+    var puuid : String = ""
+    var name : String = ""
+    var profileIconId : Int = 0
+    var summonerLevel : Int = 0
     
     func getSummonerByName(summonerName : String, platform : String, onComplete : @escaping (Bool) -> Void) {
         if (summonerName.count == 0 || platform.count == 0) {
