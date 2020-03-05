@@ -12,9 +12,9 @@ import Foundation
 class MMatchData : ObservableObject {
     
     // player data to display in match history list
-    @Published var Units : [String] = []
-    @Published var Traits : [String] = []
-    @Published var placement : String = ""
+    @Published var units : [MUnitData] = []
+    @Published var traits : [MTraitData] = []
+    @Published var placement : Int = 0
     @Published var setNumber : Int = 0
     @Published var gameDateTime : Int = 0
     @Published var gameLength : Int = 0
@@ -54,6 +54,14 @@ class MMatchData : ObservableObject {
                         guard let participantJSONArray : [[String : Any]] = info["participants"] as? [[String : Any]] else { onComplete(false); return; }
                         
                         let participantsData = participantJSONArray.map{ MParticipantData(data: $0) }
+                        
+                        participantsData.forEach{ (element : MParticipantData) in
+                            if (puuid == element.puuid) {
+                                self.units = element.units
+                                self.traits = element.traits
+                                self.placement = element.placement
+                            }
+                        }
                         
                         DispatchQueue.main.async {
                             self.participantsIDList = participantsIDList

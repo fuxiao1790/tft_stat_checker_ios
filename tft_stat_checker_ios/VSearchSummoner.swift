@@ -206,8 +206,7 @@ struct MatchHistoryItem : View {
             } else if (self.status == MatchHistoryItem.FAILED) {
                 Text("Load Failed")
             } else if (self.status == MatchHistoryItem.LOADED) {
-                Text("Display MATCH DATA HERE")
-                Text("Match ID: \(self.matchID.stringID)")
+                Text("Placement: \(matchData.placement)")
             }
         } //HStack attrs
             .onAppear(perform: self.onAppear)
