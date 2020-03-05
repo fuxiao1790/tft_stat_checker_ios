@@ -36,14 +36,16 @@ class MSummonerData {
             completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
                 if let data = data {
                     do {
-                        guard let json:[String:Any] = try JSONSerialization.jsonObject(with : data, options : []) as? [String : Any] else {return}
+                        guard let json:[String:Any] = try JSONSerialization.jsonObject(with : data, options : []) as? [String : Any] else { onComplete(false); return; }
                         
-                        guard let id = json["id"] as? String else {return}
-                        guard let accountId = json["accountId"] as? String else {return}
-                        guard let puuid = json["puuid"] as? String else {return}
-                        guard let name = json["name"] as? String else {return}
-                        guard let profileIconId = json["profileIconId"] as? Int else {return}
-                        guard let summonerLevel = json["summonerLevel"] as? Int else {return}
+                        print(json)
+                        
+                        guard let id = json["id"] as? String else { onComplete(false); return; }
+                        guard let accountId = json["accountId"] as? String else { onComplete(false); return; }
+                        guard let puuid = json["puuid"] as? String else { onComplete(false); return; }
+                        guard let name = json["name"] as? String else { onComplete(false); return; }
+                        guard let profileIconId = json["profileIconId"] as? Int else { onComplete(false); return; }
+                        guard let summonerLevel = json["summonerLevel"] as? Int else { onComplete(false); return; }
                         
                         self.id = id;
                         self.accountId = accountId;
@@ -52,14 +54,13 @@ class MSummonerData {
                         self.profileIconId = profileIconId;
                         self.summonerLevel = summonerLevel;
                         
-                        print(json)
-                        
                         onComplete(true)
                     } catch {
                         print(error)
                         onComplete(false)
                     }
                 } else {
+                    print("failed")
                     onComplete(false)
                 }
             } // completionHandler

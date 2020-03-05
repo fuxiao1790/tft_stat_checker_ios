@@ -9,6 +9,7 @@
 import Foundation
 
 class MSummonerRankedData {
+    // raw data
     var leagueId : String = ""
     var queueType : String = ""
     var tier : String = ""
@@ -22,7 +23,10 @@ class MSummonerRankedData {
     var inactive : Bool = false
     var freshBlood : Bool = false
     var hotStreak : Bool = false
+    
+    // computed display text
     var rankDisplayText : String = ""
+    var winRateDisplayText : String = ""
     
     func getSummonerRankById(id : String, platform : String, onComplete: @escaping (Bool) -> Void) {
         if (id.count == 0 || platform.count == 0) {
@@ -47,6 +51,7 @@ class MSummonerRankedData {
                 if let data = data {
                     do {
                         guard let jsonArray : [Any] = try JSONSerialization.jsonObject(with: data, options: []) as? [Any] else { onComplete(false); return }
+                        print(jsonArray)
                         guard let json : [String:Any] = jsonArray[0] as? [String : Any] else { onComplete(false); return }
                         
                         guard let leagueId = json["leagueId"] as? String else { onComplete(false); return }
@@ -76,9 +81,9 @@ class MSummonerRankedData {
                         self.inactive = inactive
                         self.freshBlood = freshBlood
                         self.hotStreak = hotStreak
-                        self.rankDisplayText = "\(self.tier) \(self.rank) \(String(self.leaguePoints)) LP"
                         
-                        print(json)
+                        self.rankDisplayText = "\(self.tier) \(self.rank) \(String(self.leaguePoints)) LP"
+                        self.winRateDisplayText = "W: \(self.wins) L: \(self.losses)"
                         
                         onComplete(true)
                     } catch {

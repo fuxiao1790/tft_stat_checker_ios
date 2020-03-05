@@ -30,10 +30,10 @@ class MMatchHistoryIDList {
             completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
                 if let data = data {
                     do {
-                        guard let idList : [String] = try JSONSerialization.jsonObject(with : data, options : []) as? [String] else {return}
-                        
-                        self.idList = idList
+                        print(data)
+                        guard let idList : [String] = try JSONSerialization.jsonObject(with : data, options : []) as? [String] else { onComplete(false); return; }
                         print(idList)
+                        self.idList = idList
                         onComplete(true)
                     } catch {
                         print(error)
