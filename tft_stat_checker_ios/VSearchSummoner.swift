@@ -17,9 +17,12 @@ struct VSearchSummoner : View {
     @State private var showPlatformPicker : Bool = false
     
     // MODELS //
-    @State private var summonerData : MSummonerData = MSummonerData()
-    @State private var summonerRankedData : MSummonerRankedData = MSummonerRankedData()
-    @State private var matchHistoryIDList : MMatchHistoryIDList = MMatchHistoryIDList()
+    @ObservedObject private var summonerData : MSummonerData = MSummonerData()
+    @ObservedObject private var summonerRankedData : MSummonerRankedData = MSummonerRankedData()
+    @ObservedObject private var matchHistoryIDList : MMatchHistoryIDList = MMatchHistoryIDList()
+    
+    @State private var testing : Bool = false
+    @State private var name : String = ""
     
     func fetchSummonerdata() {
         self.summonerData.getSummonerByName(
@@ -39,7 +42,6 @@ struct VSearchSummoner : View {
             id: self.summonerData.id,
             platform: self.searchPlatform,
             onComplete: { (status) in
-                self.isLoadingData = false
                 if (status) {
                     // todo: ??
                 }
@@ -52,7 +54,6 @@ struct VSearchSummoner : View {
             puuid: self.summonerData.puuid,
             platform: self.searchPlatform,
             onComplete: { (status) in
-                self.isLoadingData = false
                 if (status) {
                     // todo: inject data into list
                 }
@@ -64,6 +65,7 @@ struct VSearchSummoner : View {
         self.showPlatformPicker.toggle()
     }
     
+    // VIEW //
     var summonerCard : some View {
         VStack() {
             Text(self.summonerData.name)
@@ -72,70 +74,144 @@ struct VSearchSummoner : View {
         }
     }
     
-    var body : some View {
-        VStack() {
-            
+    var searchBar : some View {
+        HStack() {
             HStack() {
-                HStack() {
-                    TextField("Summoner Name", text: $searchText)
-                        .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
-                        .font(.body)
-                    // END OF TextField
-                    
-                    Button(
-                        action: { self.togglePlatformPicker() },
-                        label: { Text(self.searchPlatform) }
-                    ) // Button attrs
-                        .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 10))
-                        .background(Color.init(UIColor.systemGray4))
-                        .cornerRadius(16)
-                        .font(.body)
-                        .sheet(
-                            isPresented: $showPlatformPicker,
-                            content: {
-                                VPlatformPicker(
-                                    toggleVisibility: self.togglePlatformPicker,
-                                    initialSelected: self.searchPlatform
-                                )
-                            }
-                        )
-                    // END OF Button
-                    
-                    Button(
-                        action: { self.fetchSummonerdata() },
-                        label: { Text("Search") }
-                    ) // Button attrs
-                        .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 10))
-                        .background(Color.init(UIColor.systemGray4))
-                        .cornerRadius(16)
-                        .font(.body)
-                        .sheet(
-                            isPresented: $showPlatformPicker,
-                            content: {
-                                VPlatformPicker(
-                                    toggleVisibility: self.togglePlatformPicker,
-                                    initialSelected: self.searchPlatform
-                                )
-                            }
-                        )
-                    // END OF Button
-                    
-                } // HStack attrs
-                    .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 8))
-                    .background(Color.init(UIColor.systemGray5))
-                    .cornerRadius(36)
-                // END OF HStack
+                TextField("Summoner Name", text: $searchText)
+                    .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
+                    .font(.body)
+                // END OF TextField
+                
+                Button(
+                    action: { self.togglePlatformPicker() },
+                    label: { Text(self.searchPlatform) }
+                ) // Button attrs
+                    .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 10))
+                    .background(Color.init(UIColor.systemGray4))
+                    .cornerRadius(16)
+                    .font(.body)
+                    .sheet(
+                        isPresented: $showPlatformPicker,
+                        content: {
+                            VPlatformPicker(
+                                toggleVisibility: self.togglePlatformPicker,
+                                initialSelected: self.searchPlatform
+                            )
+                        }
+                    )
+                // END OF Button
+                
+                Button(
+                    action: { self.fetchSummonerdata() },
+                    label: { Text("Search") }
+                ) // Button attrs
+                    .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 10))
+                    .background(Color.init(UIColor.systemGray4))
+                    .cornerRadius(16)
+                    .font(.body)
+                    .sheet(
+                        isPresented: $showPlatformPicker,
+                        content: {
+                            VPlatformPicker(
+                                toggleVisibility: self.togglePlatformPicker,
+                                initialSelected: self.searchPlatform
+                            )
+                        }
+                    )
+                // END OF Button
                 
             } // HStack attrs
-                .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 16))
+                .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 8))
+                .background(Color.init(UIColor.systemGray5))
+                .cornerRadius(36)
             // END OF HStack
             
-            Text(self.summonerData.name)
-            Text(self.summonerRankedData.rankDisplayText)
-            Text(self.summonerRankedData.winRateDisplayText)
-            
+        } // HStack attrs
+            .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 16))
+        // END OF HStack
+    }
+    
+    var matchHistoryList : some View {
+        List {
+            self.summonerCard
+            ForEach(self.matchHistoryIDList.MatchIDList) { id in
+                MatchHistoryItem(
+                    matchID: id,
+                    platform: self.searchPlatform,
+                    summonerData : self.summonerData,
+                    summonerRankedData : self.summonerRankedData
+                )
+            }
+        }// List attrs
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .navigationBarItems(leading: self.searchBar)
+        // END OF List
+    }
+    
+    var body : some View {
+        VStack() {
+            self.searchBar
+            Divider()
+            self.matchHistoryList
             Spacer()
         }
+    }
+}
+
+struct MatchHistoryItem : View {
+    public static let LOADING : Int = 0
+    public static let FAILED : Int = 1
+    public static let UNSEEN : Int = 2
+    public static let LOADED : Int = 3
+    
+    let matchID : MatchID
+    let platform : String
+    let summonerData : MSummonerData
+    let summonerRankedData : MSummonerRankedData
+    @State private var status : Int = MatchHistoryItem.UNSEEN
+    @ObservedObject private var matchData : MMatchData = MMatchData()
+    
+    init(matchID : MatchID, platform : String, summonerData : MSummonerData, summonerRankedData : MSummonerRankedData) {
+        self.matchID = matchID
+        self.platform = platform
+        self.summonerData = summonerData
+        self.summonerRankedData = summonerRankedData
+    }
+    
+    func onAppear() {
+        if (self.status == MatchHistoryItem.UNSEEN) {
+            self.status = MatchHistoryItem.LOADING
+            self.matchData.getMatchDataByMatchID(
+                id: self.matchID.stringID,
+                platform: self.platform,
+                puuid: self.summonerData.puuid,
+                onComplete: { (status) in
+                    if (status) {
+                        self.status = MatchHistoryItem.LOADED
+                    } else {
+                        self.status = MatchHistoryItem.FAILED
+                    }
+                }
+            )
+            print("loading: \(self.matchID.stringID)")
+        }
+    }
+    
+    var body : some View {
+        HStack() {
+            if (self.status == MatchHistoryItem.LOADING) {
+                Text("Loading")
+            } else if (self.status == MatchHistoryItem.UNSEEN) {
+                Text("YOU CAN'T SEE ME")
+            } else if (self.status == MatchHistoryItem.FAILED) {
+                Text("Load Failed")
+            } else if (self.status == MatchHistoryItem.LOADED) {
+                Text("Display MATCH DATA HERE")
+                Text("Match ID: \(self.matchID.stringID)")
+            }
+        } //HStack attrs
+            .onAppear(perform: self.onAppear)
+        // END OF HStack
     }
 }
 
@@ -144,15 +220,3 @@ struct VSearchSummoner_Previews: PreviewProvider {
         VSearchSummoner()
     }
 }
-
-
-//            List {
-//                self.summonerCard
-//                Text("Large Title").font(.largeTitle)
-//                Text("Title").font(.title)
-//                Text("Headline").font(.headline)
-//                Text("SubHeadline").font(.subheadline)
-//                Text("Body").font(.body)
-//                Text("Callout").font(.callout)
-//                Text("FootNote").font(.footnote)
-//            }

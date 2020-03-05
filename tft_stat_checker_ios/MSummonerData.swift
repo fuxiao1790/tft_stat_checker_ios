@@ -8,14 +8,14 @@
 
 import Foundation
 
-class MSummonerData {
+class MSummonerData : ObservableObject {
 
-    var id : String = ""
-    var accountId : String = ""
-    var puuid : String = ""
-    var name : String = ""
-    var profileIconId : Int = 0
-    var summonerLevel : Int = 0
+    @Published var id : String = ""
+    @Published var accountId : String = ""
+    @Published var puuid : String = ""
+    @Published var name : String = ""
+    @Published var profileIconId : Int = 0
+    @Published var summonerLevel : Int = 0
     
     func getSummonerByName(summonerName : String, platform : String, onComplete : @escaping (Bool) -> Void) {
         if (summonerName.count == 0 || platform.count == 0) {
@@ -47,14 +47,16 @@ class MSummonerData {
                         guard let profileIconId = json["profileIconId"] as? Int else { onComplete(false); return; }
                         guard let summonerLevel = json["summonerLevel"] as? Int else { onComplete(false); return; }
                         
-                        self.id = id;
-                        self.accountId = accountId;
-                        self.puuid = puuid;
-                        self.name = name;
-                        self.profileIconId = profileIconId;
-                        self.summonerLevel = summonerLevel;
-                        
-                        onComplete(true)
+                        DispatchQueue.main.async {
+                            self.id = id;
+                            self.accountId = accountId;
+                            self.puuid = puuid;
+                            self.name = name;
+                            self.profileIconId = profileIconId;
+                            self.summonerLevel = summonerLevel;
+                            
+                            onComplete(true)
+                        }
                     } catch {
                         print(error)
                         onComplete(false)

@@ -8,8 +8,8 @@
 
 import Foundation
 
-class MMatchHistoryIDList {
-    var idList : [String] = []
+class MMatchHistoryIDList : ObservableObject{
+    @Published var MatchIDList : [MatchID] = []
     
     func getMatchHistoryIDListByPUUID(puuid : String, platform : String, onComplete: @escaping (Bool) -> Void) {
         if (puuid.count == 0 || platform.count == 0) {
@@ -30,11 +30,14 @@ class MMatchHistoryIDList {
             completionHandler: {(data: Data?, response: URLResponse?, error: Error?) in
                 if let data = data {
                     do {
-                        print(data)
                         guard let idList : [String] = try JSONSerialization.jsonObject(with : data, options : []) as? [String] else { onComplete(false); return; }
                         print(idList)
-                        self.idList = idList
-                        onComplete(true)
+                        
+                        DispatchQueue.main.async {
+                            self.MatchIDList = idList.map{ MatchID(stringID: $0) }
+                            
+                            onComplete(true)
+                        }
                     } catch {
                         print(error)
                         onComplete(false)
@@ -44,5 +47,15 @@ class MMatchHistoryIDList {
                 }
             } // completionHandler
         ).resume()
+    }
+}
+
+struct MatchID : Identifiable {
+    var id : UUID
+    var stringID : String
+    
+    init(stringID : String) {
+        self.id = UUID()
+        self.stringID = stringID
     }
 }

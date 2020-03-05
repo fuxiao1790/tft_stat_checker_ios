@@ -9,12 +9,12 @@
 import SwiftUI
 
 struct VPlatformPicker: View {
-    private let platforms : [String]
+    private let platforms : [Platform]
     private var toggleVisibility : () -> Void
     @State private var selected : String = ""
     
     init(toggleVisibility : @escaping () -> Void, initialSelected : String) {
-        self.platforms = CONFIG.PLATFORM_LIST
+        self.platforms = CONFIG.PLATFORM_LIST.map{ Platform(name: $0) }
         self.toggleVisibility = toggleVisibility
         self.selected = initialSelected
     }
@@ -25,14 +25,6 @@ struct VPlatformPicker: View {
     
     func saveOnPress() {
         self.toggleVisibility()
-    }
-    
-    func naOnPress() {
-        self.selected = "NA"
-    }
-    
-    func euOnPress() {
-        self.selected = "EU"
     }
     
     var body: some View {
@@ -60,17 +52,31 @@ struct VPlatformPicker: View {
             
             Divider()
             
-            Button(
-                action: self.naOnPress,
-                label: { Text("NA") }
-            )
-            
-            Button(
-                action: self.euOnPress,
-                label: { Text("EU") }
-            )
+            List(self.platforms) { platform in
+                PlatformItem(platform: platform)
+            }
             
             Spacer()
         }
+    }
+}
+
+struct PlatformItem : View {
+    var platform : Platform
+    init(platform : Platform) {
+        self.platform = platform
+    }
+    var body : some View {
+        Text(platform.name)
+    }
+}
+
+struct Platform : Identifiable{
+    var id : UUID
+    var name : String
+    
+    init(name : String) {
+        self.id = UUID()
+        self.name = name
     }
 }

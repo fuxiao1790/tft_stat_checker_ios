@@ -8,25 +8,25 @@
 
 import Foundation
 
-class MSummonerRankedData {
+class MSummonerRankedData : ObservableObject {
     // raw data
-    var leagueId : String = ""
-    var queueType : String = ""
-    var tier : String = ""
-    var rank : String = ""
-    var summonerId : String = ""
-    var summonerName: String = ""
-    var leaguePoints : Int = 0
-    var wins : Int = 0
-    var losses : Int = 0
-    var veteran : Bool = false
-    var inactive : Bool = false
-    var freshBlood : Bool = false
-    var hotStreak : Bool = false
+    @Published var leagueId : String = ""
+    @Published var queueType : String = ""
+    @Published var tier : String = ""
+    @Published var rank : String = ""
+    @Published var summonerId : String = ""
+    @Published var summonerName: String = ""
+    @Published var leaguePoints : Int = 0
+    @Published var wins : Int = 0
+    @Published var losses : Int = 0
+    @Published var veteran : Bool = false
+    @Published var inactive : Bool = false
+    @Published var freshBlood : Bool = false
+    @Published var hotStreak : Bool = false
     
     // computed display text
-    var rankDisplayText : String = ""
-    var winRateDisplayText : String = ""
+    @Published var rankDisplayText : String = ""
+    @Published var winRateDisplayText : String = ""
     
     func getSummonerRankById(id : String, platform : String, onComplete: @escaping (Bool) -> Void) {
         if (id.count == 0 || platform.count == 0) {
@@ -68,24 +68,26 @@ class MSummonerRankedData {
                         guard let freshBlood = json["freshBlood"] as? Bool else { onComplete(false); return }
                         guard let hotStreak = json["hotStreak"] as? Bool else { onComplete(false); return }
 
-                        self.leagueId = leagueId
-                        self.queueType = queueType
-                        self.tier = tier
-                        self.rank = rank
-                        self.summonerName = summonerName
-                        self.summonerId = summonerId
-                        self.leaguePoints = leaguePoints
-                        self.wins = wins
-                        self.losses = losses
-                        self.veteran = veteran
-                        self.inactive = inactive
-                        self.freshBlood = freshBlood
-                        self.hotStreak = hotStreak
-                        
-                        self.rankDisplayText = "\(self.tier) \(self.rank) \(String(self.leaguePoints)) LP"
-                        self.winRateDisplayText = "W: \(self.wins) L: \(self.losses)"
-                        
-                        onComplete(true)
+                        DispatchQueue.main.async {
+                            self.leagueId = leagueId
+                            self.queueType = queueType
+                            self.tier = tier
+                            self.rank = rank
+                            self.summonerName = summonerName
+                            self.summonerId = summonerId
+                            self.leaguePoints = leaguePoints
+                            self.wins = wins
+                            self.losses = losses
+                            self.veteran = veteran
+                            self.inactive = inactive
+                            self.freshBlood = freshBlood
+                            self.hotStreak = hotStreak
+                            
+                            self.rankDisplayText = "\(self.tier) \(self.rank) \(String(self.leaguePoints)) LP"
+                            self.winRateDisplayText = "W: \(self.wins) L: \(self.losses)"
+                            
+                            onComplete(true)
+                        }
                     } catch {
                         print(error)
                         onComplete(false)

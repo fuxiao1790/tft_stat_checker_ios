@@ -11,6 +11,10 @@
 		95AD189BA9E020039FC64E5F /* Pods_tft_stat_checker_ios_tft_stat_checker_iosTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2605696172DAC5F36A2CF16 /* Pods_tft_stat_checker_ios_tft_stat_checker_iosTests.framework */; };
 		A6A3124BEF6EC8FB2A70031C /* Pods_tft_stat_checker_ios.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A65330B14A725A1B17DC649C /* Pods_tft_stat_checker_ios.framework */; };
 		AC48F7992410483500ACC00C /* VPlatformPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48F7982410483500ACC00C /* VPlatformPicker.swift */; };
+		AC48F7CD241193A400ACC00C /* MMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48F7CC241193A400ACC00C /* MMatchData.swift */; };
+		AC48F7CF24119F9600ACC00C /* MParticipantData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48F7CE24119F9600ACC00C /* MParticipantData.swift */; };
+		AC48F7D12411A22900ACC00C /* MUnitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48F7D02411A22900ACC00C /* MUnitData.swift */; };
+		AC48F7D32411A24900ACC00C /* MTraitData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC48F7D22411A24900ACC00C /* MTraitData.swift */; };
 		ACD117A4240EFCCF004021FA /* MSummonerRankedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD117A3240EFCCF004021FA /* MSummonerRankedData.swift */; };
 		ACD117A6240FF599004021FA /* MMatchHistoryIDList.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD117A5240FF599004021FA /* MMatchHistoryIDList.swift */; };
 		ACD117AB24100D28004021FA /* VMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD117AA24100D28004021FA /* VMain.swift */; };
@@ -55,6 +59,10 @@
 		A515E8E03CC72BE08576CC6C /* Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig"; path = "Target Support Files/Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests/Pods-tft_stat_checker_ios-tft_stat_checker_iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		A65330B14A725A1B17DC649C /* Pods_tft_stat_checker_ios.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_tft_stat_checker_ios.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC48F7982410483500ACC00C /* VPlatformPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlatformPicker.swift; sourceTree = "<group>"; };
+		AC48F7CC241193A400ACC00C /* MMatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMatchData.swift; sourceTree = "<group>"; };
+		AC48F7CE24119F9600ACC00C /* MParticipantData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MParticipantData.swift; sourceTree = "<group>"; };
+		AC48F7D02411A22900ACC00C /* MUnitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUnitData.swift; sourceTree = "<group>"; };
+		AC48F7D22411A24900ACC00C /* MTraitData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTraitData.swift; sourceTree = "<group>"; };
 		ACD117A3240EFCCF004021FA /* MSummonerRankedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MSummonerRankedData.swift; sourceTree = "<group>"; };
 		ACD117A5240FF599004021FA /* MMatchHistoryIDList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMatchHistoryIDList.swift; sourceTree = "<group>"; };
 		ACD117AA24100D28004021FA /* VMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMain.swift; sourceTree = "<group>"; };
@@ -163,9 +171,13 @@
 		C3F5A4DA24085979005D8F79 /* tft_stat_checker_ios */ = {
 			isa = PBXGroup;
 			children = (
+				C3F5A52624096AE3005D8F79 /* MSummonerData.swift */,
 				ACD117A3240EFCCF004021FA /* MSummonerRankedData.swift */,
 				ACD117A5240FF599004021FA /* MMatchHistoryIDList.swift */,
-				C3F5A52624096AE3005D8F79 /* MSummonerData.swift */,
+				AC48F7CC241193A400ACC00C /* MMatchData.swift */,
+				AC48F7CE24119F9600ACC00C /* MParticipantData.swift */,
+				AC48F7D02411A22900ACC00C /* MUnitData.swift */,
+				AC48F7D22411A24900ACC00C /* MTraitData.swift */,
 				ACD117AA24100D28004021FA /* VMain.swift */,
 				AC48F7982410483500ACC00C /* VPlatformPicker.swift */,
 				C3F5A4DF24085979005D8F79 /* VSearchSummoner.swift */,
@@ -452,10 +464,14 @@
 				ACD117AB24100D28004021FA /* VMain.swift in Sources */,
 				ACD117AF2410120B004021FA /* VItems.swift in Sources */,
 				ACD117A6240FF599004021FA /* MMatchHistoryIDList.swift in Sources */,
+				AC48F7CF24119F9600ACC00C /* MParticipantData.swift in Sources */,
 				C3F5A542240972CC005D8F79 /* CONFIG.swift in Sources */,
 				C3F5A4DE24085979005D8F79 /* SceneDelegate.swift in Sources */,
+				AC48F7CD241193A400ACC00C /* MMatchData.swift in Sources */,
+				AC48F7D32411A24900ACC00C /* MTraitData.swift in Sources */,
 				AC48F7992410483500ACC00C /* VPlatformPicker.swift in Sources */,
 				C3F5A4E024085979005D8F79 /* VSearchSummoner.swift in Sources */,
+				AC48F7D12411A22900ACC00C /* MUnitData.swift in Sources */,
 				C3F5A52724096AE3005D8F79 /* MSummonerData.swift in Sources */,
 				ACD117A4240EFCCF004021FA /* MSummonerRankedData.swift in Sources */,
 			);
