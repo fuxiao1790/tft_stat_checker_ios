@@ -8,12 +8,13 @@
 
 import Foundation
 
-class MUnitData {
+class MUnitData : Identifiable{
     var characterID : String = ""
     var name : String = ""
     var rarity : Int = 0
     var tier : Int = 0
     var items : [Int] = []
+    var id : UUID = UUID()
     
     init(data : [String : Any]) {
         guard let characterID = data["character_id"] as? String else { return }
