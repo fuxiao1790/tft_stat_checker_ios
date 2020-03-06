@@ -8,12 +8,13 @@
 
 import Foundation
 
-class MTraitData {
+class MTraitData : Identifiable {
     var name : String = ""
     var numUnits : Int = 0
     var style : Int = 0
     var tierCurrent : Int = 0
     var tierTotal : Int = 0
+    var id : UUID = UUID()
     
     init(data : [String : Any]) {
         guard let name = data["name"] as? String else { return }

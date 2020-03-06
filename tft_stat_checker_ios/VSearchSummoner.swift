@@ -198,6 +198,7 @@ struct MatchHistoryItem : View {
         }
     }
     
+    // VIEW //
     var loading : some View {
         Text("Loading")
     }
@@ -210,22 +211,30 @@ struct MatchHistoryItem : View {
         HStack() {
             Text(String(self.matchData.placement))
                 .font(.system(.body))
-            VStack(){
+            VStack(alignment: .leading){
                 // list of units
                 HStack() {
                     ForEach(self.matchData.units) { (unit : MUnitData) in
-                        Text(unit.name)
-                            .font(.system(.body))
-                            .padding(EdgeInsets(top: 4, leading: 4, bottom: 10, trailing: 10))
-                            .background(Color.init(UIColor.systemGray3))
+                        Image(unit.characterID.lowercased())
+                            .frame(width: 32, height: 32)
                             .cornerRadius(4)
                     }
                 }
                 // list of traits
                 HStack() {
+                    ForEach(self.matchData.traits) { (trait : MTraitData) in
+                        Image(trait.name.lowercased())
+                            .frame(width: 32, height: 32)
+                            .cornerRadius(4)
+                    }
+                }
+                HStack() {
                     // game time
                     Text(String(self.matchData.gameDateTime))
                         .font(.system(.body))
+                    
+                    Spacer()
+                    
                     // game duration
                     Text(String(self.matchData.gameLength))
                         .font(.system(.body))
