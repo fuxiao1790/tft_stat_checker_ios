@@ -124,6 +124,7 @@ struct VSearchSummoner : View {
                 .padding(EdgeInsets(top: 6, leading: 12, bottom: 6, trailing: 8))
                 .background(Color.init(UIColor.systemGray5))
                 .cornerRadius(36)
+                .shadow(radius: 2)
             // END OF HStack
             
         } // HStack attrs
@@ -197,17 +198,28 @@ struct MatchHistoryItem : View {
         }
     }
     
+    var loading : some View {
+        Text("Loading")
+    }
+    
+    var unseen : some View {
+        Text("YOU CAN'T SEE ME")
+    }
+    
+    var loaded : some View {
+        Text("Placement: \(matchData.placement)")
+    }
+    
+    var failed : some View {
+        Text("Load Failed")
+    }
+    
     var body : some View {
         HStack() {
-            if (self.status == MatchHistoryItem.LOADING) {
-                Text("Loading")
-            } else if (self.status == MatchHistoryItem.UNSEEN) {
-                Text("YOU CAN'T SEE ME")
-            } else if (self.status == MatchHistoryItem.FAILED) {
-                Text("Load Failed")
-            } else if (self.status == MatchHistoryItem.LOADED) {
-                Text("Placement: \(matchData.placement)")
-            }
+            if (self.status == MatchHistoryItem.LOADING) { self.loading }
+            else if (self.status == MatchHistoryItem.UNSEEN) { self.unseen }
+            else if (self.status == MatchHistoryItem.FAILED) { self.failed }
+            else if (self.status == MatchHistoryItem.LOADED) { self.loaded }
         } //HStack attrs
             .onAppear(perform: self.onAppear)
         // END OF HStack

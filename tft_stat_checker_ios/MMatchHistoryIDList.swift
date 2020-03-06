@@ -18,7 +18,7 @@ class MMatchHistoryIDList : ObservableObject{
         let platformURL : String = CONFIG.getRegionURLByName(platform: platform)
         let route : String = "/tft/match/v1/matches/by-puuid/"
         let data : String = puuid + "/ids?" + "count=100"
-        let urlString = platformURL + route + data
+        let urlString : String = (platformURL + route + data).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.addValue(CONFIG.API_KEY, forHTTPHeaderField: "X-Riot-Token")

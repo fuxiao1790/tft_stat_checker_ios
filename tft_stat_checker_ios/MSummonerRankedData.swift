@@ -37,7 +37,7 @@ class MSummonerRankedData : ObservableObject {
         let route : String = "/tft/league/v1/entries/by-summoner/"
         let data : String = id
         
-        let urlString : String = platformURL + route + data
+        let urlString : String = (platformURL + route + data).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url : URL = URL(string: urlString)!
         
         var request = URLRequest(url: url)

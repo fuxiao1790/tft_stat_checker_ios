@@ -24,7 +24,7 @@ class MSummonerData : ObservableObject {
         let platformURL : String = CONFIG.getPlatformURLByName(platform: platform)
         let route : String = "/tft/summoner/v1/summoners/by-name"
         let data : String = "/" + summonerName + "?summonerName=" + summonerName
-        let urlString = platformURL + route + data
+        let urlString : String = (platformURL + route + data).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.addValue(CONFIG.API_KEY, forHTTPHeaderField: "X-Riot-Token")

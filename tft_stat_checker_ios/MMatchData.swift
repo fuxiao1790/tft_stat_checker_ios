@@ -30,7 +30,7 @@ class MMatchData : ObservableObject {
         let platformURL : String = CONFIG.getRegionURLByName(platform: platform)
         let route : String = "/tft/match/v1/matches/"
         let data : String = id
-        let urlString = platformURL + route + data
+        let urlString : String = (platformURL + route + data).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
         let url = URL(string: urlString)!
         var request = URLRequest(url: url)
         request.addValue(CONFIG.API_KEY, forHTTPHeaderField: "X-Riot-Token")
@@ -55,18 +55,19 @@ class MMatchData : ObservableObject {
                         
                         let participantsData = participantJSONArray.map{ MParticipantData(data: $0) }
                         
+                        self.participantsIDList = participantsIDList
+                        self.participantsData = participantsData
+                        
                         participantsData.forEach{ (element : MParticipantData) in
                             if (puuid == element.puuid) {
-                                self.units = element.units
-                                self.traits = element.traits
-                                self.placement = element.placement
+                                DispatchQueue.main.async {
+                                    self.units = element.units
+                                    self.traits = element.traits
+                                    self.placement = element.placement
+                                    
+                                    onComplete(true)
+                                }
                             }
-                        }
-                        
-                        DispatchQueue.main.async {
-                            self.participantsIDList = participantsIDList
-                            self.participantsData = participantsData
-                            onComplete(true)
                         }
                     } catch {
                         print(error)
