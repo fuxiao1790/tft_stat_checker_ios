@@ -21,9 +21,6 @@ struct VSearchSummoner : View {
     @ObservedObject private var summonerRankedData : MSummonerRankedData = MSummonerRankedData()
     @ObservedObject private var matchHistoryIDList : MMatchHistoryIDList = MMatchHistoryIDList()
     
-    @State private var testing : Bool = false
-    @State private var name : String = ""
-    
     func fetchSummonerdata() {
         self.summonerData.getSummonerByName(
             summonerName: self.searchText,
@@ -69,8 +66,13 @@ struct VSearchSummoner : View {
     var summonerCard : some View {
         VStack() {
             Text(self.summonerData.name)
+                .font(.system(.title))
+            
             Text(self.summonerRankedData.rankDisplayText)
+                .font(.system(.body))
+            
             Text(self.summonerRankedData.winRateDisplayText)
+                .font(.system(.body))
         }
     }
     
@@ -207,25 +209,55 @@ struct MatchHistoryItem : View {
         Text("YOU CAN'T SEE ME")
     }
     
+    func getTraitBackgroundByStyle(style : Int) -> LinearGradient {
+        switch style {
+            case 1: return LinearGradient(gradient: Gradient(colors: [Color(rgb: 0xA1785D), Color(rgb: 0xCA9372)]), startPoint: .top, endPoint: .bottom)
+            case 2: return LinearGradient(gradient: Gradient(colors: [Color(rgb: 0x707070), Color(rgb: 0xA0A0A0)]), startPoint: .top, endPoint: .bottom)
+            case 3, 4: return LinearGradient(gradient: Gradient(colors: [Color(rgb: 0xC28A27), Color(rgb: 0xFFB93B)]), startPoint: .top, endPoint: .bottom)
+            default: return LinearGradient(gradient: Gradient(colors: [Color(rgb: 0xA1785D), Color(rgb: 0xCA9372)]), startPoint: .top, endPoint: .bottom)
+        }
+    }
+    
+    func getUnitBorderColorByTier(tier : Int) -> Color {
+        switch tier {
+            case 0: return Color(rgb: 0x606060)
+            case 1: return Color(rgb: 0x11B288)
+            case 2: return Color(rgb: 0x207AC7)
+            case 3: return Color(rgb: 0xC440DA)
+            case 4: return Color(rgb: 0xFFB93B)
+            case 5: return Color(rgb: 0xFFFFFF)
+            default: return Color(rgb: 0x606060)
+        }
+    }
+    
     var loaded : some View {
         HStack() {
             Text(String(self.matchData.placement))
-                .font(.system(.body))
+                .font(.system(.title))
+                .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
             VStack(alignment: .leading){
                 // list of units
                 HStack() {
                     ForEach(self.matchData.units) { (unit : MUnitData) in
                         Image(unit.characterID.lowercased())
-                            .frame(width: 32, height: 32)
+                            .resizable()
+                            .border(Color.purple, width: 5)
                             .cornerRadius(4)
+                            .frame(width: 64, height: 64)
                     }
                 }
                 // list of traits
                 HStack() {
                     ForEach(self.matchData.traits) { (trait : MTraitData) in
-                        Image(trait.name.lowercased())
-                            .frame(width: 32, height: 32)
+                        VStack() {
+                            Image(trait.name.lowercased())
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        } // VStack attrs
+                            .padding(EdgeInsets(top: 6, leading: 6, bottom: 6, trailing: 6))
+                            .background(Color.init(UIColor.systemGray3))
                             .cornerRadius(4)
+                        // END OF VStack
                     }
                 }
                 HStack() {
@@ -262,5 +294,15 @@ struct MatchHistoryItem : View {
 struct VSearchSummoner_Previews: PreviewProvider {
     static var previews: some View {
         VSearchSummoner()
+    }
+}
+
+extension Color {
+    init(rgb: Int) {
+        self.init(
+            red: Double((rgb >> 16) & 0xFF),
+            green: Double((rgb >> 8) & 0xFF),
+            blue: Double(rgb & 0xFF)
+        )
     }
 }

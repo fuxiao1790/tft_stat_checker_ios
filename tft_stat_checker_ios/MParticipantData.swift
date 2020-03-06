@@ -35,7 +35,7 @@ class MParticipantData {
         
         guard let traitJSONList : [[String : Any]] = data["traits"] as? [[String : Any]] else { return }
         var traits = traitJSONList.map{ MTraitData(data: $0) }
-        traits.sort{(a : MTraitData, b : MTraitData) in return b.style > a.style}
+        traits.sort{(a : MTraitData, b : MTraitData) in return b.style < a.style}
         
         self.goldLeft = goldLeft
         self.lastRound = lastRound
